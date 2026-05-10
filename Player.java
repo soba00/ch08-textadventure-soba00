@@ -37,7 +37,7 @@ public class Player
     {
         for(Item item : items) 
         {
-            if(item.getDescription().equals(name))
+            if(item.getDescription().toLowerCase().contains(name.toLowerCase()))
             {
                 return item;
             }
@@ -72,7 +72,7 @@ public class Player
      * Based of getItemString()
      * @return Details of the room's exits.
      */
-    private String openInventory()
+    public String openInventory()
     {
         if(items.isEmpty()) {
          return "You see only lint and dust in your empty inventory";   

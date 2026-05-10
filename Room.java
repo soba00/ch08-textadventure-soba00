@@ -55,7 +55,7 @@ public class Room
     {
         for(Item item : items) 
         {
-            if(item.getDescription().equals(name))
+            if(item.getDescription().toLowerCase().contains(name.toLowerCase()))
             {
                 return item;
             }
