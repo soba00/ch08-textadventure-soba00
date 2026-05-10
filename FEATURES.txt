@@ -1,0 +1,13 @@
+FEATURES IMPLEMENTED:
+
+- Multiple rooms (added 3 rooms to template)
+- Room navigation using GO
+- LOOK command to reprint area description and inventory
+- BACK command using return to previous rooms (saves as Stack)
+- Room inventory for items
+- Player inventory for items
+- TAKE command to add items to inventory
+- DROP command to remove items from inventory
+- Player class manages current room and inventory
+- Multiple items for room and player inventories (items as ArrayList)
+

@@ -87,7 +87,7 @@ public class Room
         String returnString = "\nItems: ";
         
         for(Item item : items) {
-            returnString += " " + item.getDescription();
+            returnString += " " + item.getDescription() +",";
         }
         return returnString;
     }

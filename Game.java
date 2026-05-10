@@ -242,7 +242,7 @@ public class Game
         Item item = player.getItem(itemString);
 
         if (item == null) {
-            System.out.println("That is not here to take!");
+            System.out.println("Cant drop what you dont have!");
         }
         else {
             player.removeItem(item);
