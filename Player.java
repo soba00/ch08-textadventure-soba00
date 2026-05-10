@@ -3,11 +3,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ArrayList;
 /**
- * Class Player - a room in an adventure game.
+ * Class Player - a Player in an adventure game.
  *
- * Represents an item in the game.
+ * Represents an Player  in the game.
+ * stores current room and inventory
  * 
- * @author  
+ * @author  Federico Cadavid Rojas
  * @version 2026.04.29
  */
 

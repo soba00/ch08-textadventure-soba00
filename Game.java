@@ -13,9 +13,13 @@ import java.util.Stack;
  *  This main class creates and initialises all the others: it creates all
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
+ *  
+ *  
+ *  basically handles game setup, command line processing, and game loop
  * 
  * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Federico Cadavid Rojas
+ * @version 2026.05.9
  */
 
 public class Game 
@@ -35,7 +39,8 @@ public class Game
     }
 
     /**
-     * Create all the rooms and link their exits together.
+     * Create all the rooms and link their exits together and 
+     * populates them with items.
      */
     private void createRooms()
     {
@@ -194,8 +199,9 @@ public class Game
     
     
     /** 
-     * Try to go in one direction. If there is an exit, enter the new
-     * room, otherwise print an error message.
+     * Try to take an item, If it is in the room, take the item, 
+     * otherwise print an error message.
+     * @param command the TAKE command for item
      */
     private void takeItem(Command command) 
     {
@@ -220,8 +226,9 @@ public class Game
     }
     
     /** 
-     * Try to go in one direction. If there is an exit, enter the new
-     * room, otherwise print an error message.
+     * Try to drop an item, If it is in inventory, drop the item, 
+     * otherwise print an error message.
+     * @param command the DROP command for item
      */
     private void dropItem(Command command) 
     {
@@ -247,6 +254,7 @@ public class Game
     /** 
      * Try to go in one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
+     * @param command the go command for a direction
      */
     private void goRoom(Command command) 
     {
@@ -276,7 +284,7 @@ public class Game
     
     
     /** 
-     * Try to go bavk to previous room. If there is an exit, enter the new
+     * Try to go back to previous room. If there is an exit, enter the new
      * room, otherwise print an error message.
      * Based of goRoom()
      */

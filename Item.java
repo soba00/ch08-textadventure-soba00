@@ -3,11 +3,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Class Item - a room in an adventure game.
+ * Class Item - an item in the game world
  *
- * Represents an item in the game.
+ * Represents an item in the game with description and weight
  * 
- * @author  
+ * @author  Federico Cadavid Rojas
  * @version 2026.04.29
  */
 
