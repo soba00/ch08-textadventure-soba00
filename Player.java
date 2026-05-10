@@ -13,37 +13,37 @@ import java.util.Iterator;
 
 public class Player 
 {
-    private String description;
-    private int weight;
+    private Room currentRoom;
+
     
     /**
-     * Create an Player described "description" with weight "weight"
+     * Create an Player with a starting room
      * 
      * @param description the Items's description.
      * @param weight the room's weight
      */
-    public Player(String description, int weight) 
+    public Player(Room startingRoom) 
     {
-        this.description = description;
-        this.weight = weight;
+        currentRoom= startingRoom;
     }
 
     /**
-     * @return the description of the item
+     * @return the the room player is in
      * (the one that was defined in the constructor).
      */
-    public String getDescription()
+    public Room getCurrentRoom()
     {
-        return description;
+        return currentRoom;
     }
 
     /**
-     * @return the weight of the item
-     * (the one that was defined in the constructor).
+     * Set player's new location
+     * @param room The new room player is in
+     * 
      */
-    public int getWeight()
+    public void setCurrentRoom(Room  room)
     {
-        return weight;
+        currentRoom = room;
     }
     
 }
