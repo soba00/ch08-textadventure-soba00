@@ -49,6 +49,7 @@ public class Room
     /**
      * Return a string describing the room's items, for example
      * "Items: Halleck's Poleaxe, Catnip of Darkvision".
+     * Based of getExitString()
      * @return Details of the room's exits.
      */
     private String getItemString()
@@ -92,14 +93,8 @@ public class Room
      */
     public String getLongDescription()
     {
-        String storeItem;
-        if(item == null){
-            storeItem ="";
-        }
-        else {
-            storeItem = "\nItems: " +item.getDescription();
-        }
-        return "You are " + description + ".\n" + getExitString()+storeItem;
+        return "You are " + description + ".\n" 
+        + getExitString()+ getItemString();
     }
 
     /**

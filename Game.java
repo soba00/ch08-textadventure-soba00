@@ -19,7 +19,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private Room previousRoom;
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -58,9 +59,9 @@ public class Game
         office.setExit("west", lab);
         
         // creates items in rooms
-        outside.setItem(new Item("a shiny bronze coin", 1));
-        pub.setItem(new Item("Taxidermy Owlbear", 14));
-        office.setItem(new Item("#1 Dad mug", 3));
+        outside.addItem(new Item("a shiny bronze coin", 1));
+        pub.addItem(new Item("Taxidermy Owlbear", 14));
+        office.addItem(new Item("#1 Dad mug", 3));
         
         currentRoom = outside;  // start game outside
     }
@@ -124,6 +125,10 @@ public class Game
                 look();
                 break;
 
+            case BACK:
+                goBack();
+                break;
+                
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -176,11 +181,32 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
     }
+    
+    /** 
+     * Try to go bavk to previous room. If there is an exit, enter the new
+     * room, otherwise print an error message.
+     * Based of goRoom()
+     */
+    private void goBack() 
+    {
+        if(previousRoom==null) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("No where to go back to");
+            return;
+        }
 
+        
+        else {
+            currentRoom = previousRoom;
+            System.out.println(currentRoom.getLongDescription());
+        }
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
