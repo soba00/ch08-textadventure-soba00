@@ -155,6 +155,10 @@ public class Game
             case TAKE:
                 takeItem(command);
                 break;
+            
+            case DROP:
+                dropItem(command);
+                break;
                 
             case QUIT:
                 wantToQuit = quit(command);
@@ -205,15 +209,39 @@ public class Game
         Item item = room.getItem(itemString);
 
         if (item == null) {
-            System.out.println("That is not here to take");
+            System.out.println("That is not here to take!");
         }
         else {
-            player.addItem(item)
-            
-            System.out.println(player.getCurrentRoom().getLongDescription());
+            player.addItem(item);
+            room. removeItem(item);
+            System.out.println("Successfully aquired " + item.getDescription());
         }
     }
     
+    /** 
+     * Try to go in one direction. If there is an exit, enter the new
+     * room, otherwise print an error message.
+     */
+    private void dropItem(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know what to get...
+            System.out.println("Drop What?");
+            return;
+        }
+
+        String itemString = command.getSecondWord();
+        Item item = player.getItem(itemString);
+
+        if (item == null) {
+            System.out.println("That is not here to take!");
+        }
+        else {
+            player.removeItem(item);
+            player.getCurrentRoom().addItem(item);
+            System.out.println("Dropped " + item.getDescription());
+        }
+    }
     
     /** 
      * Try to go in one direction. If there is an exit, enter the new

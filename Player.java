@@ -28,7 +28,22 @@ public class Player
         currentRoom= startingRoom;
         items = new ArrayList<>();
     }
-
+    
+    /**
+     * returns the description of an item in the Player's Inventory
+     * @return The item in the inventory
+     */
+    public Item getItem(String name)
+    {
+        for(Item item : items) 
+        {
+            if(item.getDescription().equals(name))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
     
     /**
      * add an Item to this Player's inventory.

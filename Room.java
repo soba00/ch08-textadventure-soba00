@@ -45,6 +45,24 @@ public class Room
     {
         items.add(item);
     }
+    
+    /**
+     * returns the description of an item in the room
+     * @return The item in the room
+     * 
+     */
+    public Item getItem(String name)
+    {
+        for(Item item : items) 
+        {
+            if(item.getDescription().equals(name))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+    
     /**
      * Define an Item from this room.
      * @param item The item being removed.
@@ -53,6 +71,7 @@ public class Room
     {
         items.remove(item);
     }
+    
     /**
      * Return a string describing the room's items, for example
      * "Items: Halleck's Poleaxe, Catnip of Darkvision".
