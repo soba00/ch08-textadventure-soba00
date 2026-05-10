@@ -39,13 +39,20 @@ public class Room
     
     /**
      * Define an Item in this room.
-     * @param item The item of the exit.
+     * @param item The item being defined.
      */
     public void addItem(Item item) 
     {
         items.add(item);
     }
-
+    /**
+     * Define an Item from this room.
+     * @param item The item being removed.
+     */
+    public void removeItem(Item item) 
+    {
+        items.remove(item);
+    }
     /**
      * Return a string describing the room's items, for example
      * "Items: Halleck's Poleaxe, Catnip of Darkvision".

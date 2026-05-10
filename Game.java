@@ -21,7 +21,7 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
     private Stack<Room> previousRooms;
     
     /**
@@ -56,8 +56,10 @@ public class Game
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
-
+        outside.setExit("north", lounge);
+        
         theater.setExit("west", outside);
+        theater.setExit("north", library);
 
         pub.setExit("east", outside);
 
@@ -66,12 +68,25 @@ public class Game
 
         office.setExit("west", lab);
         
+        
+        lounge.setExit("south", outside);
+        lounge.setExit("east", library);
+        lounge.setExit("north", arcade);
+        
+        
+        library.setExit("west", lounge);
+        library.setExit("south", theater);
+        
+        arcade.setExit("south", lounge);
+
+        
         // creates items in rooms
         outside.addItem(new Item("a shiny bronze coin", 1));
         pub.addItem(new Item("Taxidermy Owlbear", 14));
         office.addItem(new Item("#1 Dad mug", 3));
         
-        currentRoom = outside;  // start game outside
+        // creates a new player outside
+        player = new Player(outside);
     }
 
     /**
@@ -102,7 +117,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
     /**
@@ -165,7 +180,7 @@ public class Game
      */
     private void look()
     {
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
     
     /** 
@@ -183,16 +198,16 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            previousRooms.push(currentRoom);
-            currentRoom = nextRoom;
+            previousRooms.push(player.getCurrentRoom());
+            player.setCurrentRoom(nextRoom);
             
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(player.getCurrentRoom().getLongDescription());
         }
     }
     
@@ -208,8 +223,8 @@ public class Game
             System.out.println("No where to go back to");
         }
         else {
-            currentRoom = previousRooms.pop();
-            System.out.println(currentRoom.getLongDescription());
+            player.setCurrentRoom(previousRooms.pop());
+            System.out.println(player.getCurrentRoom().getLongDescription());
         }
     }
     

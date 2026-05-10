@@ -1,7 +1,7 @@
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
-
+import java.util.ArrayList;
 /**
  * Class Player - a room in an adventure game.
  *
@@ -14,6 +14,7 @@ import java.util.Iterator;
 public class Player 
 {
     private Room currentRoom;
+    private ArrayList<Item> items;
 
     
     /**
@@ -25,8 +26,49 @@ public class Player
     public Player(Room startingRoom) 
     {
         currentRoom= startingRoom;
+        items = new ArrayList<>();
     }
 
+    
+    /**
+     * add an Item to this Player's inventory.
+     * @param item The item being added.
+     */
+    public void addItem(Item item) 
+    {
+        items.add(item);
+    }
+
+    /**
+     * Remove an Item from this Player's inventory.
+     * @param item The item being removed.
+     */
+    public void removeItem(Item item) 
+    {
+        items.remove(item);
+    }
+
+    /**
+     * Return a string describing the room's items, for example
+     * "Items: Halleck's Poleaxe, Catnip of Darkvision".
+     * Based of getExitString()
+     * @return Details of the room's exits.
+     */
+    private String openInventory()
+    {
+        if(items.isEmpty()) {
+         return "You see only lint and dust in your empty inventory";   
+        }
+        
+        String returnString = "You are carrying: \n";
+        
+        for(Item item : items) {
+            returnString += " " + item.getDescription();
+        }
+        return returnString;
+    }
+    
+    
     /**
      * @return the the room player is in
      * (the one that was defined in the constructor).
