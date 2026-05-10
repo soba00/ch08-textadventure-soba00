@@ -152,6 +152,10 @@ public class Game
                 goBack();
                 break;
                 
+            case TAKE:
+                takeItem(command);
+                break;
+                
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -183,6 +187,34 @@ public class Game
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
     
+    
+    /** 
+     * Try to go in one direction. If there is an exit, enter the new
+     * room, otherwise print an error message.
+     */
+    private void takeItem(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know what to get...
+            System.out.println("Take What?");
+            return;
+        }
+
+        String itemString = command.getSecondWord();
+        Room room = player.getCurrentRoom();
+        Item item = room.getItem(itemString);
+
+        if (item == null) {
+            System.out.println("That is not here to take");
+        }
+        else {
+            player.addItem(item)
+            
+            System.out.println(player.getCurrentRoom().getLongDescription());
+        }
+    }
+    
+    
     /** 
      * Try to go in one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
@@ -210,6 +242,9 @@ public class Game
             System.out.println(player.getCurrentRoom().getLongDescription());
         }
     }
+    
+    
+    
     
     /** 
      * Try to go bavk to previous room. If there is an exit, enter the new

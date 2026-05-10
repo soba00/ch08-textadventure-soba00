@@ -50,8 +50,11 @@ public class Player
 
     /**
      * Return a string describing the room's items, for example
-     * "Items: Halleck's Poleaxe, Catnip of Darkvision".
-     * Based of getExitString()
+     * "You are carrying: 
+     *  - Halleck's Poleaxe 
+     *  - Catnip of Darkvision"
+     *  
+     * Based of getItemString()
      * @return Details of the room's exits.
      */
     private String openInventory()
@@ -63,7 +66,7 @@ public class Player
         String returnString = "You are carrying: \n";
         
         for(Item item : items) {
-            returnString += " " + item.getDescription();
+            returnString += "- " + item.getDescription()+"\n";
         }
         return returnString;
     }
