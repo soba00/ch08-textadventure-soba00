@@ -1,3 +1,6 @@
+import java.util.Stack;
+
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,7 +22,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Room previousRoom;
+    private Stack<Room> previousRooms;
     
     /**
      * Create the game and initialise its internal map.
@@ -28,6 +31,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        previousRooms = new Stack<>();
     }
 
     /**
@@ -35,7 +39,8 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, lounge, arcade, library, 
+        office;
       
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -43,6 +48,9 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        lounge = new Room("in a study lounge");
+        arcade = new Room("in an archade");
+        library = new Room("in a dusty old library");
         
         // initialise room exits
         outside.setExit("east", theater);
@@ -181,8 +189,9 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            previousRoom = currentRoom;
+            previousRooms.push(currentRoom);
             currentRoom = nextRoom;
+            
             System.out.println(currentRoom.getLongDescription());
         }
     }
@@ -194,15 +203,12 @@ public class Game
      */
     private void goBack() 
     {
-        if(previousRoom==null) {
+        if(previousRooms.isEmpty()) {
             // if there is no second word, we don't know where to go...
             System.out.println("No where to go back to");
-            return;
         }
-
-        
         else {
-            currentRoom = previousRoom;
+            currentRoom = previousRooms.pop();
             System.out.println(currentRoom.getLongDescription());
         }
     }
