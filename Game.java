@@ -56,7 +56,12 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
-
+        
+        // creates items in rooms
+        outside.setItem(new Item("a shiny bronze coin", 1));
+        pub.setItem(new Item("Taxidermy Owlbear", 14));
+        office.setItem(new Item("#1 Dad mug", 3));
+        
         currentRoom = outside;  // start game outside
     }
 
